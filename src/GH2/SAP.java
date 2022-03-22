@@ -6,6 +6,7 @@ interface Shape {
 }
 
 class Circle implements Shape {
+
     public void calculateArea(int r) {
     double area;
     area = 3.1415 * r * r;
