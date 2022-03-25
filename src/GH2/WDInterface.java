@@ -1,18 +1,22 @@
 package GH2;
 
-interface RemoteWebDriver{
-    void navigate();
-}
-interface TakesScreenshot {
-    void getScreenshot();
-}
+interface WebDriver{
 
-interface WebDriver extends RemoteWebDriver, TakesScreenshot {
     void open();
 
     void close();
 
     String getTitle();
+
+}
+interface TakesScreenshot {
+    void getScreenshot();
+}
+
+interface RemoteWebDriver extends WebDriver, TakesScreenshot {
+
+    void navigate();
+
 }
 
 class ChromeDriver implements WebDriver, RemoteWebDriver, TakesScreenshot {
@@ -93,13 +97,13 @@ class SafariDriver implements WebDriver, RemoteWebDriver, TakesScreenshot {
 public class WDInterface {
     public static void main (String[] args){
 
-        WebDriver browserChrome = new ChromeDriver();
-        WebDriver browserFirefox = new FirefoxDriver();
-        WebDriver browserSafari = new SafariDriver();
+        RemoteWebDriver browserChrome = new ChromeDriver();
+        RemoteWebDriver browserFirefox = new FirefoxDriver();
+        RemoteWebDriver browserSafari = new SafariDriver();
 
-        WebDriver[] browsers = {new ChromeDriver(), new FirefoxDriver(), new SafariDriver()};
+        RemoteWebDriver[] browsers = {new ChromeDriver(), new FirefoxDriver(), new SafariDriver()};
 
-        for(WebDriver CFS : browsers){
+        for(RemoteWebDriver CFS : browsers){
             CFS.open();
             System.out.println("Title is: " + CFS.getTitle());
             CFS.navigate();
